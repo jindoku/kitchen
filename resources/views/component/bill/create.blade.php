@@ -3,7 +3,6 @@
     Lập hóa đơn
 @endsection
 @section('head.css')
-    <link rel="stylesheet" type="text/css" href="{{asset('template/css/select2.min.css')}}">
 @endsection
 @section('content')
     <div class="page-header m-t-150 page-header-index">
@@ -72,7 +71,6 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{asset('template/js/select2.full.min.js')}}"></script>
     <script type="module" src="{{asset('js/modules/index.js')}}"></script>
     <script type="module" src="{{asset('js/modules/bill.js')}}"></script>
 @endsection

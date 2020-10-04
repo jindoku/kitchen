@@ -47,7 +47,7 @@
                     </div>
                     <hr>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary mr-2 add btn-sm a-font-size-13" title="Lưu mới">
+                        <button type="submit" class="btn btn-inverse mr-2 add btn-sm a-font-size-13" title="Lưu mới">
                             <i class="fa fa-save"></i> Lưu mới
                         </button>
                         <a href="{{route('category-product.index')}}" class="btn btn-secondary btn-sm a-font-size-13"

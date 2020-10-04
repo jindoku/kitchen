@@ -1,5 +1,5 @@
 
-.card .card-header .header-span {
+.header-span {
     margin-top: 0px !important;
     color: #ffffff !important;
     background-color: #404E67;
@@ -328,7 +328,7 @@ p {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #01a9ac !important;
+    background-color: #404E67 !important;
     color: #FFFFFF !important;
 }
 
@@ -394,4 +394,16 @@ p {
 
 .del-record-bill-detail:hover{
     cursor: pointer;
+}
+
+.radio-inverse input:checked ~ .helper::before{
+    color: #404E67;
+}
+
+.radio-inverse .helper::after, .radio .helper::before{
+    border: 0.125rem solid #404E67;
+}
+
+.radio-inverse .helper::after{
+    background-color: #404E67
 }

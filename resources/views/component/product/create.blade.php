@@ -2,9 +2,6 @@
 @section('head.title')
     Thêm mới thiết bị
 @endsection
-@section('head.css')
-    <link rel="stylesheet" type="text/css" href="{{asset('template/css/select2.min.css')}}">
-@endsection
 @section('content')
     <div class="page-header m-t-150 page-header-index">
         <div class="row">
@@ -77,7 +74,7 @@
                     </div>
                     <hr>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary mr-2 add btn-sm a-font-size-13" title="Lưu mới">
+                        <button type="submit" class="btn btn-inverse mr-2 add btn-sm a-font-size-13" title="Lưu mới">
                             <i class="fa fa-save"></i> Lưu mới
                         </button>
                         <a href="{{route('product.index')}}" class="btn btn-secondary btn-sm a-font-size-13"
@@ -91,6 +88,5 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{asset('template/js/select2.full.min.js')}}"></script>
     <script type="module" src="{{asset('js/modules/index.js')}}"></script>
 @endsection

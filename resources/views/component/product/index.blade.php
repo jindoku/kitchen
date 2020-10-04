@@ -2,9 +2,6 @@
 @section('head.title')
     Quản lý thiết bị
 @endsection
-@section('head.css')
-    <link rel="stylesheet" type="text/css" href="{{asset('template/css/select2.min.css')}}">
-@endsection
 @section('content')
     <div class="page-header m-t-150 page-header-index">
         <div class="row">
@@ -17,7 +14,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="float-right p-r-10">
-                    <a class="btn btn-primary btn-sm color-white" title="Thêm mới" href="{{route('product.create')}}">
+                    <a class="btn btn-inverse btn-sm color-white" title="Thêm mới" href="{{route('product.create')}}">
                         <i class="fa fa-plus"></i> Thêm mới
                     </a>
                 </div>
@@ -78,7 +75,6 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{asset('template/js/select2.full.min.js')}}"></script>
     <script type="module" src="{{asset('js/modules/index.js')}}"></script>
     <script type="module" src="{{asset('js/modules/product.js')}}"></script>
 @endsection

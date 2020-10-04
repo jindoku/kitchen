@@ -66,19 +66,19 @@
                         <div class="form-group col-md-3">
                             <label class="col-form-label">Giới tính</label>
                             <div class="form-radio">
-                                <div class="radio radio-inline">
+                                <div class="radio radio-inline radio-inverse">
                                     <label>
                                         <input type="radio" name="sex" value="1" @if($sexChecked == 1) checked @endif>
                                         <i class="helper"></i>Nam
                                     </label>
                                 </div>
-                                <div class="radio radio-inline">
+                                <div class="radio radio-inline radio-inverse">
                                     <label>
                                         <input type="radio" name="sex" value="2" @if($sexChecked == 2) checked @endif>
                                         <i class="helper"></i>Nữ
                                     </label>
                                 </div>
-                                <div class="radio radio-inline">
+                                <div class="radio radio-inline radio-inverse">
                                     <label>
                                         <input type="radio" name="sex" value="3" @if($sexChecked == 3) checked @endif>
                                         <i class="helper"></i>Khác
@@ -100,7 +100,7 @@
                     </div>
                     <hr>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary mr-2 add btn-sm a-font-size-13" title="Lưu mới">
+                        <button type="submit" class="btn btn-inverse mr-2 add btn-sm a-font-size-13" title="Lưu mới">
                             <i class="fa fa-save"></i> Chỉnh sửa
                         </button>
                         <a href="{{route('customer.index')}}" class="btn btn-secondary btn-sm a-font-size-13"

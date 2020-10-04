@@ -21,6 +21,7 @@ var Config = (function () {
 
         return html;
     };
+
     var handleConfirmation = function () {
         $('.add-record-product').on('click', function () {
             resource.pre_loader('.waitting-preloader', 1);
@@ -46,6 +47,13 @@ var Config = (function () {
             var rowIndex = $(this).parent().closest("tr").index() + 1;
             console.log(rowIndex);
         });
+
+        //in hóa đơn
+        $('.print-invoice').on('click', function () {
+            $('#invoice-print').printThis({
+                importCSS: true,
+            })
+        })
     };
 
     return {

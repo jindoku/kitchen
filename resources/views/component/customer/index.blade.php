@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="float-right p-r-10">
-                    <a class="btn btn-primary btn-sm color-white" title="Thêm mới" href="{{route('customer.create')}}">
+                    <a class="btn btn-inverse btn-sm color-white" title="Thêm mới" href="{{route('customer.create')}}">
                         <i class="fa fa-plus"></i> Thêm mới
                     </a>
                 </div>

@@ -12,10 +12,10 @@
 @include('component.layout.theme-loader')
 <!-- Pre-loader end -->
 <div class="waitting-preloader preloader3 display-none">
-    <div class="circ1 loader-lg"></div>
-    <div class="circ2 loader-lg"></div>
-    <div class="circ3 loader-lg"></div>
-    <div class="circ4 loader-lg"></div>
+    <div class="circ1 loader-lg loader-inverse"></div>
+    <div class="circ2 loader-lg loader-inverse"></div>
+    <div class="circ3 loader-lg loader-inverse"></div>
+    <div class="circ4 loader-lg loader-inverse"></div>
 </div>
 <div id="pcoded" class="pcoded">
     <div class="pcoded-overlay-box"></div>
