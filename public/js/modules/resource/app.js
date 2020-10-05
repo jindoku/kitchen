@@ -1,4 +1,4 @@
-const http = 'http://localhost:8080/kitchen/public/';
+const http = 'http://localhost/kitchen/public/';
 class Resource {
     url_http(){
         return http;

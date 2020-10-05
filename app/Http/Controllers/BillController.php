@@ -66,4 +66,12 @@ class BillController extends Controller
         $categoryProducts = $this->billService->getCategoryProduct();
         return response()->json($categoryProducts, 200);
     }
+
+    public function getProductByCategory(Request $request)
+    {
+        $categoryId = !empty($request->category_id) ? $request->category_id : 0;
+        $productByCategory = $this->billService->getProductByCategory($categoryId);
+
+        return response()->json($productByCategory, 200);
+    }
 }

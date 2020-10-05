@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Repositories\BillRepository;
 use App\Repositories\CategoryProductRepository;
 use App\Repositories\CustomerRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\Arr;
 
 class BillService
@@ -69,5 +70,11 @@ class BillService
     {
         $categoryProductRepository = new CategoryProductRepository();
         return $categoryProductRepository->all(['id', 'name']);
+    }
+
+    public function getProductByCategory($categoryId)
+    {
+        $productRepository = new ProductRepository();
+        return $productRepository->query()->where('category_id', $categoryId)->isNotDelete()->get(['id', 'name']);
     }
 }

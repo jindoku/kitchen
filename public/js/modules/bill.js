@@ -4,15 +4,15 @@ const resource = new Resource();
 var Config = (function () {
     var httpUrlApi = resource.url_router_api();
     var renderHtmlBillDetail = function (categoryProduct = [], row) {
-        var html = '<tr data-row="' + row + '">';
+        var html = '<tr>';
         html += '<td class="text-center">' + row + '</td>';
-        html += '<td><select id="cate-pro-bill-detail-' + row + '" class="form-control form-control-sm bill-detail-category">';
+        html += '<td><select class="form-control form-control-sm select-bill-detail-category" name="category_id_' + row + '">';
         html += '<option>--- Nhóm hàng ---</option>';
         for (var i = 0; i < categoryProduct.length; i++) {
             html += '<option value="' + categoryProduct[i].id + '">' + categoryProduct[i].name + '</option>'
         }
         html += '</select></td>';
-        html += '<td><select id="product-bill-detail-' + row + '" class="form-control form-control-sm"><option>--- Sản phẩm ---</option></select></td>';
+        html += '<td><select class="form-control form-control-sm select-product-bill-detail" name="product_id_' + row + '"><option>--- Sản phẩm ---</option></select></td>';
         html += '<td><input type="number" min="1" class="form-control"></td>';
         html += '<td></td>';
         html += '<td></td>';
@@ -21,6 +21,11 @@ var Config = (function () {
 
         return html;
     };
+
+    var refreshSelect2 = function (){
+        resource.select2('.select-bill-detail-category');
+        resource.select2('.select-product-bill-detail');
+    }
 
     var handleConfirmation = function () {
         $('.add-record-product').on('click', function () {
@@ -31,10 +36,10 @@ var Config = (function () {
                 type: 'GET',
                 url: httpUrlApi + '/get-category-product',
                 success: function (res) {
+                    console.log(res);
                     var html = renderHtmlBillDetail(res, rowNumber);
                     $('#bill-detail-product').append(html);
-                    resource.select2('#cate-pro-bill-detail-' + rowNumber);
-                    resource.select2('#product-bill-detail-' + rowNumber);
+                    refreshSelect2();
                     resource.pre_loader('.waitting-preloader', 0)
                 }
             })
@@ -44,8 +49,14 @@ var Config = (function () {
         $('#bill-detail-product').on('click', '.del-record-bill-detail', function () {
             var elIndex = $(this).parent().closest("tr");
             var elNextAll = elIndex.nextAll();
-            var rowIndex = $(this).parent().closest("tr").index() + 1;
-            console.log(rowIndex);
+            for (var i = 0; i < elNextAll.length; i++) {
+                var rowNow = $(elNextAll[i]).index();
+                $(elNextAll[i]).children(':nth-child(1)').html(rowNow);
+                $(elNextAll[i]).children(':nth-child(2)').children().attr('name', 'category_id_' + rowNow);
+            }
+            refreshSelect2();
+            elIndex.remove();
+
         });
 
         //in hóa đơn
