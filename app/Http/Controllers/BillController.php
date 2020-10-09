@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Http\Requests\BillRequest;
 use App\Services\BillService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
 {
@@ -32,9 +34,19 @@ class BillController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(BillRequest $billRequest)
     {
-        //
+        try{
+            $data = $billRequest->all();
+            dd($data);
+            $this->billService->storeBill($data);
+            return redirect()->route('bill.index')->with(['status'=>'success','message'=>'Thêm mới thành công']);
+        }
+        catch (\Exception $ex)
+        {
+            Log::error($ex->getMessage());
+            return back()->with(['status' => 'error', 'message' => 'Thêm mới không thành công']);
+        }
     }
 
 

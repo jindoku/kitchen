@@ -1,9 +1,5 @@
-const http = 'http://localhost/kitchen/public/';
+const http = 'http://localhost:8080/kitchen/public/';
 class Resource {
-    url_http(){
-        return http;
-    }
-
     url_router_api(){
         return http + 'api';
     }

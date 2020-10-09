@@ -46,6 +46,10 @@
                             {{--</td>--}}
                         {{--</tr>--}}
                     </tbody>
+                    <tfoot id="tfoot-bill-detail">
+                        <td colspan="5" class="text-right font-weight-bold">Tổng tiền</td>
+                        <td colspan="2" class="text-center font-weight-bold"></td>
+                    </tfoot>
                 </table>
             </div>
         </div>

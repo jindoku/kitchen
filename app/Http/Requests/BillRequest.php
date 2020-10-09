@@ -13,18 +13,31 @@ class BillRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'code' => 'required|max:255',
+            'customer_id' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => ':attribute không được bỏ trống',
+            'max' => ':attribute không được quá ký tự'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'code' => 'Mã hóa đơn',
+            'customer_id' => 'Khách hàng',
+            'note' => 'Ghi chú'
         ];
     }
 }

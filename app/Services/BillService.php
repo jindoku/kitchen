@@ -8,6 +8,7 @@ use App\Repositories\CategoryProductRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class BillService
 {
@@ -48,16 +49,16 @@ class BillService
     }
 
     //service create data
-    public function storeProduct($data)
+    public function storeBill($data)
     {
         $data['created_by'] = Auth::id();
-        $this->productRepository->save($data);
+        $this->billRepository->save($data);
     }
 
     public function updateProduct($data, $id)
     {
         $data['updated_by'] = Auth::id();
-        $this->productRepository->save($data, $id);
+        $this->billRepository->save($data, $id);
     }
 
     public function getCustomer()
@@ -75,6 +76,6 @@ class BillService
     public function getProductByCategory($categoryId)
     {
         $productRepository = new ProductRepository();
-        return $productRepository->query()->where('category_id', $categoryId)->isNotDelete()->get(['id', 'name']);
+        return $productRepository->query()->where('category_id', $categoryId)->isNotDelete()->get(['id', 'name', 'price']);
     }
 }
