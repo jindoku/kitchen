@@ -29,7 +29,7 @@ class BillRepository
         return Bill::query();
     }
 
-    public function saveBill($data, int $id = null)
+    public function saveBill($data, int $id)
     {
         $userId = Auth::id();
         $arrBill = [
@@ -55,7 +55,7 @@ class BillRepository
     {
         $userId = Auth::id();
         if ($bill->billDetail->count() > 0)
-            $bill->billDetail->delete();
+            BillDetail::where('bill_id', $bill->id)->delete();
 
         for ($i = 1; $i <= $data['total_row']; $i++) {
             BillDetail::create([
