@@ -65,9 +65,20 @@ class BillController extends Controller
     }
 
 
-    public function update(BillRequest $request, $bill)
+    public function update(BillRequest $billRequest, $bill)
     {
-        dd(1);
+        try{
+            $data = $billRequest->all();
+            DB::beginTransaction();
+
+            DB::commit();
+            return redirect()->route('bill.index')->with(['status'=>'success','message'=>'Chỉnh sửa thành công']);
+        }
+        catch (\Exception $ex)
+        {
+            Log::error($ex->getMessage());
+            return back()->with(['status' => 'error', 'message' => 'Chỉnh sửa không thành công']);
+        }
     }
 
     public function destroy($id)
