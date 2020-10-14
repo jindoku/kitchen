@@ -51,12 +51,12 @@
                             <tr>
                                 <td class="text-center">{{$key + 1 + $index}}</td>
                                 <td>{{$bill->code}}</td>
-                                <td>{{$bill->customer_id}}</td>
-                                <td>{{$bill->staff_id}}</td>
-                                <td>{{$bill->updated_at}}</td>
+                                <td>{{$bill->customer->fullname}}</td>
+                                <td>{{$bill->staff->fullname}}</td>
+                                <td class="text-center">{{$bill->updated_at}}</td>
                                 <td>{{$bill->note}}</td>
                                 <td class="text-center">
-                                    <a class="p-l-5" href="{{route('customer.edit', $bill->id)}}" title="Chỉnh sửa">
+                                    <a class="p-l-5" href="{{route('bill.edit', $bill->id)}}" title="Chỉnh sửa">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
 

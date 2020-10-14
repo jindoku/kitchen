@@ -60,7 +60,7 @@
                         <button type="submit" class="btn btn-inverse mr-2 add btn-sm a-font-size-13" title="Lưu mới">
                             <i class="fa fa-save"></i> Lưu mới
                         </button>
-                        <a href="{{route('staff.index')}}" class="btn btn-secondary btn-sm a-font-size-13"
+                        <a href="{{route('bill.index')}}" class="btn btn-secondary btn-sm a-font-size-13"
                            title="Quay lại">
                             <i class="fa fa-arrow-left"></i> Quay lại
                         </a>

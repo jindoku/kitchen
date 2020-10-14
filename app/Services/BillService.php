@@ -49,16 +49,11 @@ class BillService
     }
 
     //service create data
-    public function storeBill($data)
+    public function storeUpdateBill($data)
     {
-        $data['created_by'] = Auth::id();
-        $this->billRepository->save($data);
-    }
-
-    public function updateProduct($data, $id)
-    {
-        $data['updated_by'] = Auth::id();
-        $this->billRepository->save($data, $id);
+        $bill = $this->billRepository->saveBill($data);
+        $bill->load('billDetail');
+        $this->billRepository->saveBillDetail($data, $bill);
     }
 
     public function getCustomer()

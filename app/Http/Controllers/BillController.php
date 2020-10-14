@@ -6,6 +6,7 @@ use App\Bill;
 use App\Http\Requests\BillRequest;
 use App\Services\BillService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
@@ -21,7 +22,6 @@ class BillController extends Controller
     {
         $searchParams = $request->all();
         $bills = $this->billService->getBills($searchParams);
-
         return view('component.bill.index', compact('bills'));
     }
 
@@ -38,8 +38,9 @@ class BillController extends Controller
     {
         try{
             $data = $billRequest->all();
-            dd($data);
-            $this->billService->storeBill($data);
+            DB::beginTransaction();
+            $this->billService->storeUpdateBill($data);
+            DB::commit();
             return redirect()->route('bill.index')->with(['status'=>'success','message'=>'Thêm mới thành công']);
         }
         catch (\Exception $ex)
@@ -59,13 +60,14 @@ class BillController extends Controller
     public function edit(Bill $bill)
     {
         $customers = $this->billService->getCustomer();
-        return view('component.bill.update', compact('bill','customers'));
+        $categoryProducts = $this->billService->getCategoryProduct();
+        return view('component.bill.update', compact('bill','customers', 'categoryProducts'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(BillRequest $request, $bill)
     {
-        //
+        dd(1);
     }
 
     public function destroy($id)

@@ -33,9 +33,9 @@ var Config = (function () {
         var total = 0;
         for (var i = 0; i < rowTr; i++){
             var totalPriceNow = $(elTr[i]).children(':nth-child(6)').text();
-            total = total+ parseInt(totalPriceNow);
+            if(totalPriceNow)
+                total = total+ parseInt(totalPriceNow);
         }
-
         if(total > 0)
             $('#tfoot-bill-detail').children().children(':nth-child(2)').text(total);
         else
@@ -54,7 +54,8 @@ var Config = (function () {
                     var html = renderHtmlBillDetail(res, rowNumber);
                     $('#bill-detail-product').append(html);
                     refreshSelect2();
-                    resource.pre_loader('.waitting-preloader', 0)
+                    resource.pre_loader('.waitting-preloader', 0);
+                    $('#total_row').val(rowNumber);
                 }
             })
         });
@@ -65,12 +66,17 @@ var Config = (function () {
             var elNextAll = elIndex.nextAll();
             for (var i = 0; i < elNextAll.length; i++) {
                 var rowNow = $(elNextAll[i]).index();
-                $(elNextAll[i]).children(':nth-child(1)').html(rowNow);
-                $(elNextAll[i]).children(':nth-child(2)').children().attr('name', 'category_id_' + rowNow);
+                var rowNew = rowNow - 1;
+                $(elNextAll[i]).children(':nth-child(1)').html(rowNew);
+                $(elNextAll[i]).children(':nth-child(2)').children().attr('name', 'category_id_' + rowNew);
+                $(elNextAll[i]).children(':nth-child(3)').children().attr('name', 'product_id_' + rowNew);
+                $(elNextAll[i]).children(':nth-child(4)').children().attr('name', 'count_product_' + rowNew);
             }
             refreshSelect2();
             elIndex.remove();
             totalPriceAll();
+            var trLength = $('#bill-detail-product tr').length;
+            $('#total_row').val(trLength);
         });
 
         $('#bill-detail-product').on('change', '.select-bill-detail-category', function () {

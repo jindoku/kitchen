@@ -20,4 +20,14 @@ class Product extends Model
     {
         return $this->belongsTo(CategoryProduct::class, 'category_id');
     }
+
+    public function scopeProductByCategory($query, $categoryId)
+    {
+        return $query->where('category_id', $categoryId);
+    }
+
+    public static function getProductByCategory($categoryId)
+    {
+        return Product::select('id', 'name', 'price')->productByCategory($categoryId)->isNotDelete()->get();
+    }
 }
