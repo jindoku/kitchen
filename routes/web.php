@@ -29,9 +29,6 @@ Route::get('/', function () {
     }
 });
 
-Route::get('view-bill', function (){
-    return view('component.bill.view-bill');
-});
 Route::group(['middleware' => ['auth']], function () {
     Route::resources([
         //nhan vien route

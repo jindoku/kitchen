@@ -51,9 +51,9 @@ class BillController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Bill $bill)
     {
-        //
+        return view('component.bill.view-bill', compact('bill'));
     }
 
 
@@ -71,7 +71,7 @@ class BillController extends Controller
             $data = $billRequest->all();
             $this->billService->storeUpdateBill($data, $bill->id);
             DB::beginTransaction();
-
+            $this->billService->storeUpdateBill($data, $bill->id);
             DB::commit();
             return redirect()->route('bill.index')->with(['status'=>'success','message'=>'Chỉnh sửa thành công']);
         }

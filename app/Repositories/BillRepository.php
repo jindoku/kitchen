@@ -29,7 +29,7 @@ class BillRepository
         return Bill::query();
     }
 
-    public function saveBill($data, int $id = null)
+    public function saveBill($data, int $id)
     {
         $userId = Auth::id();
         $arrBill = [
