@@ -65,10 +65,11 @@ class BillController extends Controller
     }
 
 
-    public function update(BillRequest $billRequest, $bill)
+    public function update(BillRequest $billRequest, Bill $bill)
     {
         try{
             $data = $billRequest->all();
+            $this->billService->storeUpdateBill($data, $bill->id);
             DB::beginTransaction();
 
             DB::commit();

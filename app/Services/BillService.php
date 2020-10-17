@@ -34,7 +34,7 @@ class BillService
         }
 
         if (!empty($customer)) {
-            $query->where('code', 'LIKE', '%' . $keyword . '%');
+
         }
 
         if(!empty($begin_date) && !empty($end_date))
@@ -49,9 +49,9 @@ class BillService
     }
 
     //service create data
-    public function storeUpdateBill($data)
+    public function storeUpdateBill($data, int $id = null)
     {
-        $bill = $this->billRepository->saveBill($data);
+        $bill = $this->billRepository->saveBill($data, $id);
         $bill->load('billDetail');
         $this->billRepository->saveBillDetail($data, $bill);
     }

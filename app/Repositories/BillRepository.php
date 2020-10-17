@@ -55,7 +55,7 @@ class BillRepository
     {
         $userId = Auth::id();
         if ($bill->billDetail->count() > 0)
-            $bill->billDetail->delete();
+            BillDetail::where('bill_id', $bill->id)->delete();
 
         for ($i = 1; $i <= $data['total_row']; $i++) {
             BillDetail::create([
