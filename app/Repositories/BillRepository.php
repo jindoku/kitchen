@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Bill;
 use App\BillDetail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BillRepository
@@ -67,5 +68,26 @@ class BillRepository
                 'updated_by' => $userId
             ]);
         }
+    }
+
+    public function export($dataExport)
+    {
+        $collections = new Collection();
+        $stt = 0;
+        foreach ($dataExport as $row) {
+            $stt += 1;
+            $arrTemp = [
+                $stt,
+                $row->code,
+                $row->customer->fullname,
+                $row->staff->fullname,
+                date('d-m-Y', strtotime($row->created_at)),
+                $row->note ? $row->note : '',
+            ];
+
+            $collections->push($arrTemp);
+        }
+
+        return $collections;
     }
 }

@@ -18,7 +18,7 @@
             <div class="col-lg-4">
                 <div class="float-right p-r-10">
                     <a class="btn btn-inverse btn-sm color-white" title="Thêm mới" href="{{route('bill.create')}}">
-                        <i class="fa fa-plus"></i> Thêm mới
+                        <i class="fa fa-plus"></i> Lập hóa đơn
                     </a>
                 </div>
             </div>
@@ -56,6 +56,10 @@
                                 <td class="text-center">{{$bill->updated_at}}</td>
                                 <td>{{$bill->note}}</td>
                                 <td class="text-center">
+                                    <a class="p-l-5" href="{{route('bill.show', $bill->id)}}" title="Xem hóa đơn">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                    </a>
+
                                     <a class="p-l-5" href="{{route('bill.edit', $bill->id)}}" title="Chỉnh sửa">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>

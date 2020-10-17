@@ -47,10 +47,10 @@
                         @foreach($customers as $key => $customer)
                             <tr>
                                 <td class="text-center">{{$key + 1 + $index}}</td>
-                                <td>{{$customer->code}}</td>
                                 <td>{{$customer->fullname}}</td>
-                                <td>{{$customer->email}}</td>
                                 <td>{{$customer->phone}}</td>
+                                <td>{{$customer->email}}</td>
+                                <td>{{$customer->birtday ? date('d-m-Y', strtotime($customer->birtday)) : ''}}</td>
                                 <td class="text-center">
                                     @if($customer->sex == 1)
                                         <label class="label label-md label-primary">Nam</label>

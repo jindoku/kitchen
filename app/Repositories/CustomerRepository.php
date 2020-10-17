@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Customer;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomerRepository{
     public function get($id)
@@ -47,5 +48,37 @@ class CustomerRepository{
             ['id' => $id],
             $arrCustomer
         );
+    }
+
+    public function export($dataExport)
+    {
+        $collections = new Collection();
+        $stt = 0;
+        foreach ($dataExport as $row) {
+            $stt += 1;
+            $arrTemp = [
+                $stt,
+                $row->fullname,
+                $row->phone ? $row->phone : '',
+                $row->email ? $row->email : ''
+            ];
+            if($row->sex == 1)
+                $sex = 'Nam';
+            elseif($row->sex == 2)
+                $sex = 'Nữ';
+            else
+                $sex = 'Khác';
+
+            array_push($arrTemp, $sex);
+            $birtday = '';
+            if($row->birtday)
+                $birtday = date('d-m-Y', strtotime($row->birtday));
+
+            array_push($arrTemp, $birtday);
+
+            $collections->push($arrTemp);
+        }
+
+        return $collections;
     }
 }

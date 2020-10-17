@@ -12,7 +12,7 @@
                 <div class="input-group date datepicker-single">
                     <input maxlength="50" type="text"
                            class="form-control" name="begin_date"
-                           value="" autocomplete="off" placeholder="Từ ngày">
+                           value="{{request('begin_date')}}" autocomplete="off" placeholder="Từ ngày">
                     <span class="input-group-addon header-span">
                         <span class="fa fa-calendar header-span"></span>
                     </span>
@@ -22,15 +22,18 @@
                 <div class="input-group date datepicker-single">
                     <input maxlength="50" type="text"
                            class="form-control" name="end_date"
-                           value="" autocomplete="off" placeholder="đến ngày">
+                           value="{{request('end_date')}}" autocomplete="off" placeholder="đến ngày">
                     <span class="input-group-addon header-span">
                         <span class="fa fa-calendar header-span"></span>
                     </span>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <button class="btn btn-inverse btn-sm" type="submit" title="Tìm kiếm">
                     <i class="fa fa-search"></i>
+                </button>
+                <button class="btn btn-inverse btn-sm" type="submit" title="Xuất excel" name="export" value="1">
+                    <i class="fa fa-file-excel-o"></i> Xuất excel
                 </button>
             </div>
         </div>

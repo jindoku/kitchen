@@ -8,6 +8,7 @@ use App\Services\BillService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BillController extends Controller
 {
@@ -21,7 +22,11 @@ class BillController extends Controller
     public function index(Request $request)
     {
         $searchParams = $request->all();
-        $bills = $this->billService->getBills($searchParams);
+        $servicebills = $this->billService->getBills($searchParams);
+        $bills = $servicebills['data'];
+        if($servicebills['key'] == 1)
+            return Excel::download($bills, 'danh-sach-hoa-don.xlsx');
+
         return view('component.bill.index', compact('bills'));
     }
 

@@ -7,6 +7,7 @@ use App\Http\Requests\CustomerRequest;
 use App\Services\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -19,7 +20,10 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $searchParams = $request->all();
-        $customers = $this->customerService->getCustomers($searchParams);
+        $serviceCustomers = $this->customerService->getCustomers($searchParams);
+        $customers = $serviceCustomers['data'];
+        if($serviceCustomers['key'] == 1)
+            return Excel::download($customers, 'danh-sach-khach-hang.xlsx');
 
         return view('component.customer.index', compact('customers'));
     }
