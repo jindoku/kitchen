@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\CategoryProduct;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryProductRepository
 {
@@ -38,6 +39,11 @@ class CategoryProductRepository
             'name' => $data['name'],
             'description' => $data['description']
         ];
+
+        if($id)
+            $arrCategoryProduct['updated_by'] = Auth::id();
+        else
+            $arrCategoryProduct['created_by'] = Auth::id();
 
         return CategoryProduct::updateOrCreate(
             ['id' => $id],

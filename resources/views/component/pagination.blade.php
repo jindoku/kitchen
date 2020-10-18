@@ -1,19 +1,27 @@
+@php
+    $dataSearchRequest = request()->toArray();
+    $url = request()->root() .'/'. request()->path();
+    if(isset($dataSearchRequest['raw']))
+        unset($dataSearchRequest['raw']);
+    $queryString = http_build_query($dataSearchRequest);
+
+@endphp
 <tr class="footable-paging">
     <td colspan="{{$column}}">
         <div class="w-100">
             <ul class="float-right p-t-5">
-                {{$datas->onEachSide(1)->links()}}
+                {{$datas->appends($dataSearchRequest)->onEachSide(1)->links()}}
             </ul>
             <ul class="pagination float-left p-t-5">
                 <p class="p-r-5 color-select-page">Hiển thị</p>
             </ul>
             <ul class="pagination float-left p-t-5">
-                <select class="number_raw">
+                <select class="number_raw" onchange="window.location.href = $(this).val()">
                     @foreach(list_number_page() as $key => $value)
                         @if($value == $datas->perPage())
-                            <option selected="selected">{{$value}}</option>
+                            <option selected="selected" value="{{$url.'?'.$queryString.'&raw='.$value}}">{{$value}}</option>
                         @else
-                            <option value="{{$value}}">{{$value}}</option>
+                            <option value="{{$url.'?'.$queryString.'&raw='.$value}}">{{$value}}</option>
                         @endif
                     @endforeach
                 </select>

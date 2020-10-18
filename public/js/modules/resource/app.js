@@ -1,4 +1,4 @@
-const http = 'http://localhost/kitchen/public/';
+const http = 'http://localhost:8080/kitchen/public/';
 class Resource {
     url_router_api(){
         return http + 'api';
@@ -96,6 +96,16 @@ class Resource {
             minimumResultsForSearch: -1,
         });
     }
+    formatMoneyPre(prepaid) {
+        if(prepaid){
+            let price = parseInt(prepaid);
+
+            let numPrice = numeral(price).format('0,0');
+
+            return numPrice;
+        }
+    }
+
 }
 
 export {Resource as default}

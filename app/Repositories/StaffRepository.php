@@ -43,8 +43,13 @@ class StaffRepository
             'sex' => $data['sex'],
             'address' => $data['address'] ? $data['address'] : null,
         ];
-        if(!$data['birtday'])
-            $arrStaff['birtday'] = date('Y-m-d', $data['birtday']);
+        if($id)
+            $arrStaff['updated_by'] = Auth::id();
+        else
+            $arrStaff['created_by'] = Auth::id();
+
+        if($data['birtday'])
+            $arrStaff['birtday'] = date('Y-m-d', strtotime($data['birtday']));
 
 
         return Staff::updateOrCreate(

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductRepository
 {
@@ -42,6 +43,11 @@ class ProductRepository
             'supplier' => $data['supplier'],
             'description' => $data['description'] ? $data['description'] : null,
         ];
+
+        if($id)
+            $arrProduct['updated_by'] = Auth::id();
+        else
+            $arrProduct['created_by'] = Auth::id();
 
         return Product::updateOrCreate(
             ['id' => $id],

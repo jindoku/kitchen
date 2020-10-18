@@ -49,13 +49,11 @@ class ProductService
     //service create data
     public function storeProduct($data)
     {
-        $data['created_by'] = Auth::id();
         $this->productRepository->save($data);
     }
 
     public function updateProduct($data, $id)
     {
-        $data['updated_by'] = Auth::id();
         $this->productRepository->save($data, $id);
     }
 

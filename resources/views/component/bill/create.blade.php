@@ -72,5 +72,6 @@
 @endsection
 @section('script')
     <script type="module" src="{{asset('js/modules/index.js')}}"></script>
+    <script src="{{asset('template/js/numeral.min.js')}}"></script>
     <script type="module" src="{{asset('js/modules/bill.js')}}"></script>
 @endsection

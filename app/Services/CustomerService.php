@@ -48,13 +48,11 @@ class CustomerService{
     //service create data
     public function storeCustomer($data)
     {
-        $data['created_by'] = Auth::id();
         $this->customerRepository->save($data);
     }
 
     public function updateCustomer($data, $id)
     {
-        $data['updated_by'] = Auth::id();
         $this->customerRepository->save($data, $id);
     }
 

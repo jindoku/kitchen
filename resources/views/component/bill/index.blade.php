@@ -2,9 +2,6 @@
 @section('head.title')
     Quản lý hóa đơn
 @endsection
-@section('head.css')
-    <link rel="stylesheet" type="text/css" href="{{asset('template/css/select2.min.css')}}">
-@endsection
 @section('content')
     <div class="page-header m-t-150 page-header-index">
         <div class="row">
@@ -62,10 +59,6 @@
 
                                     <a class="p-l-5" href="{{route('bill.edit', $bill->id)}}" title="Chỉnh sửa">
                                         <i class="fa fa-edit fa-lg"></i>
-                                    </a>
-
-                                    <a class="del-record color-red p-l-5" data-id="{{$bill->id}}" href="javascript:void(0)">
-                                        <i class="fa fa-trash fa-lg" title="Xóa"></i>
                                     </a>
                                 </td>
                             </tr>

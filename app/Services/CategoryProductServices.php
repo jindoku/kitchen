@@ -39,13 +39,11 @@ class CategoryProductServices
     //service create data
     public function storeCategoryProduct($data)
     {
-        $data['created_by'] = Auth::id();
         $this->categoryProductRepository->save($data);
     }
 
     public function updateCategoryProduct($data, $id)
     {
-        $data['updated_by'] = Auth::id();
         $this->categoryProductRepository->save($data, $id);
     }
 

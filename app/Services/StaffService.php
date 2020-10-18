@@ -40,13 +40,11 @@ class StaffService
     //service create data
     public function storeStaff($data)
     {
-        $data['created_by'] = Auth::id();
         $this->staffRepository->save($data);
     }
 
     public function updateStaff($data, $id)
     {
-        $data['updated_by'] = Auth::id();
         $this->staffRepository->save($data, $id);
     }
 

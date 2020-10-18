@@ -80,8 +80,8 @@
                                                 <td>{{$billDetail->categoryProduct->name}}</td>
                                                 <td>{{$billDetail->product->name}}</td>
                                                 <td>{{$amount}}</td>
-                                                <td>{{$price}}</td>
-                                                <td>{{$total}}</td>
+                                                <td>{{number_format($price, 0, '.', '.')}}</td>
+                                                <td>{{number_format($total, 0, '.', '.')}}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -99,7 +99,7 @@
                                             <h5 class="text-primary">Tổng thanh toán :</h5>
                                         </td>
                                         <td>
-                                            <h5 class="text-primary">{{$totalAll}}</h5>
+                                            <h5 class="text-primary">{{number_format($totalAll,0, '.', '.')}}</h5>
                                         </td>
                                     </tr>
                                     </tbody>

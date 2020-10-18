@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Customer;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerRepository{
     public function get($id)
@@ -40,8 +42,13 @@ class CustomerRepository{
             'sex' => $data['sex'],
             'address' => $data['address'] ? $data['address'] : null,
         ];
-        if(!$data['birtday'])
-            $arrStaff['birtday'] = date('Y-m-d', $data['birtday']);
+        if($id)
+            $arrCustomer['updated_by'] = Auth::id();
+        else
+            $arrCustomer['created_by'] = Auth::id();
+
+        if($data['birtday'])
+            $arrCustomer['birtday'] = date('Y-m-d', strtotime($data['birtday']));
 
 
         return Customer::updateOrCreate(

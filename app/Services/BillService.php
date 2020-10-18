@@ -10,7 +10,6 @@ use App\Repositories\CustomerRepository;
 use App\Repositories\ProductRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 class BillService
 {
@@ -61,7 +60,7 @@ class BillService
     }
 
     //service create data
-    public function storeUpdateBill($data, int $id = null)
+    public function storeUpdateBill($data, $id = null)
     {
         $bill = $this->billRepository->saveBill($data, $id);
         $bill->load('billDetail');
