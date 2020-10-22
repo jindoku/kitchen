@@ -4,7 +4,7 @@
 <script type="text/javascript" src="{{asset('template/js/popper.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('template/js/bootstrap.min.js')}}"></script>
 <!--datepicker-->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="{{asset('template/js/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('template/js/bootstrap-datepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('template/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('template/js/datepicker.vi.js')}}"></script>
