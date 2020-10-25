@@ -32,6 +32,7 @@
                         <thead class="t-head-inverse">
                         <tr>
                             <th>STT</th>
+                            <th>Ảnh</th>
                             <th>Mã thiết bị</th>
                             <th>Tên thiết bị</th>
                             <th>Nhóm hàng</th>
@@ -47,6 +48,13 @@
                         @foreach($products as $key => $product)
                             <tr>
                                 <td class="text-center">{{$key + 1 + $index}}</td>
+                                <td class="text-center">
+                                    @if($product->thumb)
+                                        <img src="{{url('storage/'. $product->thumb)}}" width="100" height="75">
+                                    @else
+                                        <strong class="text-danger">No Image</strong>
+                                    @endif
+                                </td>
                                 <td>{{$product->code}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->categoryProduct->name}}</td>
@@ -65,7 +73,7 @@
                         @endforeach
                         </tbody>
                         <tfoot>
-                        @include('component.pagination', ['column' => 7, 'datas' => $products])
+                        @include('component.pagination', ['column' => 8, 'datas' => $products])
                         </tfoot>
                     </table>
                 </div>

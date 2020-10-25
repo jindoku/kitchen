@@ -18,4 +18,3 @@
 <script src="{{asset('template/js/vartical-layout.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('template/js/script.min.js')}}"></script>
 <script src="{{asset('template/js/select2.full.min.js')}}"></script>
-

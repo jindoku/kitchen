@@ -35,7 +35,8 @@ class BillController extends Controller
     {
         $customers = $this->billService->getCustomer();
         $categoryProducts = $this->billService->getCategoryProduct();
-        return view('component.bill.create', compact('customers', 'categoryProducts'));
+        $staffs = $this->billService->getStaffs();
+        return view('component.bill.create', compact('customers', 'categoryProducts', 'staffs'));
     }
 
 
@@ -66,7 +67,8 @@ class BillController extends Controller
     {
         $customers = $this->billService->getCustomer();
         $categoryProducts = $this->billService->getCategoryProduct();
-        return view('component.bill.update', compact('bill','customers', 'categoryProducts'));
+        $staffs = $this->billService->getStaffs();
+        return view('component.bill.update', compact('bill','customers', 'categoryProducts', 'staffs'));
     }
 
 
@@ -74,7 +76,6 @@ class BillController extends Controller
     {
         try{
             $data = $billRequest->all();
-            $this->billService->storeUpdateBill($data, $bill->id);
             DB::beginTransaction();
             $this->billService->storeUpdateBill($data, $bill->id);
             DB::commit();

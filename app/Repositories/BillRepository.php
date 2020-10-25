@@ -36,7 +36,7 @@ class BillRepository
         $arrBill = [
             'code' => $data['code'],
             'customer_id' => $data['customer_id'],
-            'staff_id' => $userId,
+            'staff_id' => $data['staff_id'],
             'note' => $data['note'] ? $data['note'] : null
         ];
 

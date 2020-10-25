@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Bill;
 use App\Repositories\StaffRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -22,8 +23,8 @@ class StaffService
         $query = $this->staffRepository->query();
         $limit = Arr::get($searchParams, 'raw', 10);
         $keyword = Arr::get($searchParams, 'keyword', '');
-        $column = Arr::get($searchParams, 'column', '');
-        $order = Arr::get($searchParams, 'order', '');
+        $column = Arr::get($searchParams, 'column', 'created_at');
+        $order = Arr::get($searchParams, 'order', 'desc');
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
                 $q->where('code', 'LIKE', '%' . $keyword . '%');
@@ -34,7 +35,7 @@ class StaffService
         if ($order)
             $query->orderBy($column, $order);
 
-        return $query->isNotDelete()->paginate($limit);
+        return $query->paginate($limit);
     }
 
     //service create data
@@ -50,10 +51,16 @@ class StaffService
 
     public function destroyStaff($id)
     {
+        $countBillByStaff = Bill::where('staff_id', $id)->count();
+        if($countBillByStaff > 0)
+            return 'bill';
+
         $staff = $this->staffRepository->get($id);
         $staff->update([
            'deleted_by' => Auth::id(),
            'deleted_at' => Carbon::now()
         ]);
+
+        return 'success';
     }
 }

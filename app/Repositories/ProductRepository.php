@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductRepository
 {
+
     public function get($id)
     {
         return Product::find($id);
@@ -52,6 +53,13 @@ class ProductRepository
         return Product::updateOrCreate(
             ['id' => $id],
             $arrProduct
+        );
+    }
+
+    public function updateThumb(string $pathThumb, $product)
+    {
+        return $product->update(
+            ['thumb' => $pathThumb]
         );
     }
 }

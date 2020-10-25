@@ -40,7 +40,7 @@
                         <tr>
                             <td class="text-center">{{$index}}</td>
                             <td>
-                                <select class="form-control form-control-sm select2-input"
+                                <select class="form-control form-control-sm select2-input select-bill-detail-category"
                                         name="category_id_{{$index}}">
                                     <option>--- Nhóm hàng ---</option>
                                     @foreach($categoryProducts as $categoryProduct)
@@ -54,7 +54,7 @@
                                 @endif
                             </td>
                             <td>
-                                <select class="form-control form-control-sm select2-input"
+                                <select class="form-control form-control-sm select2-input select-product-bill-detail"
                                         name="product_id_{{$index}}">
                                     <option>--- Sản phẩm ---</option>
                                     @foreach($productLists as $productList)

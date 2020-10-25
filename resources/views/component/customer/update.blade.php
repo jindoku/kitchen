@@ -53,7 +53,7 @@
                             <div class="input-group date datepicker-single">
                                 <input maxlength="50" type="text"
                                        class="form-control" name="birtday"
-                                       value="{{!empty($customer->birtday) ? date('d-m-Y', $customer->birtday) : date('d-m-Y')}}"
+                                       value="{{!empty($customer->birtday) ? date('d-m-Y', strtotime($customer->birtday)) : date('d-m-Y')}}"
                                        autocomplete="off">
                                 <span class="input-group-addon header-span">
                                     <span class="fa fa-calendar header-span"></span>

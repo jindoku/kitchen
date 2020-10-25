@@ -75,11 +75,27 @@ class CategoryProductController extends Controller
     public function destroy($id)
     {
         try{
-            $this->categoryProductService->destroyCategoryProduct($id);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Xóa bản ghi thành công'
-            ], 200);
+            $result = $this->categoryProductService->destroyCategoryProduct($id);
+            switch ($result){
+                case 'bill':
+                    return response()->json([
+                        'status' => 'warning',
+                        'message' => 'Không thể xóa bản ghi đang tồn tại ở hóa đơn'
+                    ], 200);
+                    break;
+                case 'product':
+                    return response()->json([
+                        'status' => 'warning',
+                        'message' => 'Không thể xóa bản ghi đang tồn tại ở sản phẩm'
+                    ], 200);
+                    break;
+                default:
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Xóa bản ghi thành công'
+                    ], 200);
+                    break;
+            }
         }
         catch (\Exception $ex)
         {

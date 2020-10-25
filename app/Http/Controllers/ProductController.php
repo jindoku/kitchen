@@ -7,6 +7,7 @@ use App\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -37,8 +38,7 @@ class ProductController extends Controller
     public function store(ProductRequest $productRequest)
     {
         try{
-            $data = $productRequest->all();
-            $this->productService->storeProduct($data);
+            $this->productService->storeProduct($productRequest);
             return redirect()->route('product.index')->with(['status'=>'success','message'=>'Thêm mới thành công']);
         }
         catch (\Exception $ex)
@@ -58,16 +58,20 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categoryProduct = $this->productService->getCategoryProduct();
+        $base64 = '';
+        if($product->thumb){
+            $content = Storage::disk('public')->get($product->thumb);
+            $base64 = base64_encode($content);
+        }
 
-        return view('component.product.update', compact('categoryProduct', 'product'));
+        return view('component.product.update', compact('categoryProduct', 'product', 'base64'));
     }
 
 
     public function update(ProductRequest $productRequest, $id)
     {
         try{
-            $data = $productRequest->all();
-            $this->productService->updateProduct($data, $id);
+            $this->productService->updateProduct($productRequest, $id);
             return redirect()->route('product.index')->with(['status'=>'success','message'=>'Chỉnh sửa thành công']);
         }
         catch (\Exception $ex)
@@ -81,7 +85,13 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try{
-            $this->productService->destroyProduct($id);
+            $result = $this->productService->destroyProduct($id);
+            if($result === 'bill')
+                return response()->json([
+                    'status' => 'warning',
+                    'message' => 'Không thể xóa bản ghi đang tồn tại ở hóa đơn'
+                ], 200);
+            
             return response()->json([
                 'status' => 'success',
                 'message' => 'Xóa bản ghi thành công'

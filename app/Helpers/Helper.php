@@ -56,3 +56,27 @@ if (!function_exists('generate_bill')) {
         }
     }
 }
+
+if (!function_exists('generate_product')) {
+    function generate_product()
+    {
+        try {
+            $staff = DB::table('product')->selectRaw('MAX(SUBSTR(code,3)) as code')->first();
+            $sttCode = !empty($staff) ? (int)$staff->code : 0;
+            $code = 'SP' . sprintf("%04s", $sttCode + 1);
+
+            return $code;
+        } catch (Exception $ex) {
+            Log::error('Có lỗi sinh mã SP');
+            abort(500, 'Có lỗi sinh mã SP');
+        }
+    }
+}
+
+/* @Hàm get file name */
+if (!function_exists('get_file_name')) {
+    function get_file_name($pathFile)
+    {
+        return substr($pathFile, strrpos($pathFile, '/') + 1);
+    }
+}

@@ -72,7 +72,13 @@ class StaffController extends Controller
     public function destroy($id)
     {
         try{
-            $this->staffService->destroyStaff($id);
+            $result = $this->staffService->destroyStaff($id);
+            if($result === 'bill')
+                return response()->json([
+                    'status' => 'warning',
+                    'message' => 'Không thể xóa bản ghi đang tồn tại ở hóa đơn'
+                ], 200);
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Xóa bản ghi thành công'

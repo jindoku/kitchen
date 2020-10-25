@@ -47,7 +47,8 @@ class ProductRequest extends FormRequest
             'category_id' => 'Nhóm hàng',
             'price' => 'Giá thành',
             'supplier' => 'Nhà cung cấp',
-            'description' => 'Mô tả'
+            'description' => 'Mô tả',
+            'product_file' => 'Ảnh'
         ];
     }
 }

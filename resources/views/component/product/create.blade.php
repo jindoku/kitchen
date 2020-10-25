@@ -17,12 +17,12 @@
     <div class="page-body">
         <div class="card card-index">
             <div class="card-block">
-                <form class="forms-sample" method="post" action="{{route('product.store')}}">
+                <form class="forms-sample" method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Mã thiết bị<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="code" value="{{ old('code') }}" autocomplete="off" maxlength="50">
+                            <input type="text" class="form-control" name="code" value="{{ generate_product() }}" autocomplete="off" maxlength="50" readonly>
                             @if ($errors->has('code'))
                                 <p class="text-danger">{{$errors->first('code')}}</p>
                             @endif
@@ -64,9 +64,25 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
+                            <label for="name_input" class="col-form-label">Ảnh sản phẩm</label>
+                            <input type="file" name="product_file" class="file-upload-default" hidden>
+                            <div class="input-group col-xs-12 mb-0">
+                                <input type="text" class="form-control file-upload-info" value="" disabled>
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-primary btn-sm a-font-size-13" type="button">
+                                        <i class="fa fa-upload"></i>Tải lên
+                                    </button>
+                                </span>
+                            </div>
+                            <div id="preview-image" class="m-t-15"></div>
+                            @if ($errors->has('product_file'))
+                                <p class="text-danger">{{$errors->first('product_file')}}</p>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-8">
                             <label class="col-form-label">Mô tả</label>
-                            <textarea type="text" class="form-control" name="description" maxlength="255" rows="5">{{old('description')}}</textarea>
+                            <textarea type="text" class="form-control" name="description" maxlength="255" rows="15">{{old('description')}}</textarea>
                             @if ($errors->has('description'))
                                 <p class="text-danger">{{$errors->first('description')}}</p>
                             @endif
@@ -89,4 +105,5 @@
 @endsection
 @section('script')
     <script type="module" src="{{asset('js/modules/index.js')}}"></script>
+    <script type="module" src="{{asset('js/modules/product.js')}}"></script>
 @endsection

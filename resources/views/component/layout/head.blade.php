@@ -21,5 +21,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('template/css/style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('template/css/jquery.mCustomScrollbar.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('template/css/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('template/assets/jquery.filer/css/jquery.filer.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
 <script src="{{asset('template/js/sweetalert.min.js')}}"></script>

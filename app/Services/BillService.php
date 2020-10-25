@@ -8,6 +8,7 @@ use App\Repositories\BillRepository;
 use App\Repositories\CategoryProductRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\StaffRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -28,8 +29,8 @@ class BillService
         $customer = Arr::get($searchParams, 'customer', '');
         $beginDate = Arr::get($searchParams, 'begin_date', '');
         $endDate = Arr::get($searchParams, 'end_date', '');
-        $column = Arr::get($searchParams, 'column', '');
-        $order = Arr::get($searchParams, 'order', '');
+        $column = Arr::get($searchParams, 'column', 'created_at');
+        $order = Arr::get($searchParams, 'order', 'desc');
         $export = Arr::get($searchParams, 'export', '');
         if (!empty($keyword)) {
             $query->where('code', 'LIKE', '%' . $keyword . '%');
@@ -70,7 +71,7 @@ class BillService
     public function getCustomer()
     {
         $customerRepository = new CustomerRepository();
-        return $customerRepository->all(['id', 'fullname']);
+        return $customerRepository->all(['id', 'fullname', 'phone']);
     }
 
     public function getCategoryProduct()
@@ -82,6 +83,12 @@ class BillService
     public function getProductByCategory($categoryId)
     {
         $productRepository = new ProductRepository();
-        return $productRepository->query()->where('category_id', $categoryId)->isNotDelete()->get(['id', 'name', 'price']);
+        return $productRepository->query()->where('category_id', $categoryId)->get(['id', 'name', 'price']);
+    }
+
+    public function getStaffs()
+    {
+        $staffRepository = new StaffRepository();
+        return $staffRepository->all(['id', 'fullname']);
     }
 }

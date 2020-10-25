@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\BillDetail;
+use App\Product;
 use App\Repositories\CategoryProductRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -21,8 +23,8 @@ class CategoryProductServices
         $query = $this->categoryProductRepository->query();
         $limit = Arr::get($searchParams, 'raw', 10);
         $keyword = Arr::get($searchParams, 'keyword', '');
-        $column = Arr::get($searchParams, 'column', '');
-        $order = Arr::get($searchParams, 'order', '');
+        $column = Arr::get($searchParams, 'column', 'created_at');
+        $order = Arr::get($searchParams, 'order', 'desc');
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
                 $q->where('code', 'LIKE', '%' . $keyword . '%');
@@ -33,7 +35,7 @@ class CategoryProductServices
         if ($order)
             $query->orderBy($column, $order);
 
-        return $query->isNotDelete()->paginate($limit);
+        return $query->paginate($limit);
     }
 
     //service create data
@@ -49,10 +51,20 @@ class CategoryProductServices
 
     public function destroyCategoryProduct($id)
     {
+        $countBillByCategory = BillDetail::where('category_product_id', $id)->count();
+        if($countBillByCategory > 0)
+            return 'bill';
+
+        $countProductByCategory = Product::where('category_id', $id)->count();
+        if($countProductByCategory > 0)
+            return 'product';
+
         $categoryProduct = $this->categoryProductRepository->get($id);
         $categoryProduct->update([
             'deleted_by' => Auth::id(),
             'deleted_at' => Carbon::now()
         ]);
+
+        return 'success';
     }
 }

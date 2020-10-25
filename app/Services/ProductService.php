@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\BillDetail;
 use App\Repositories\CategoryProductRepository;
 use App\Repositories\ProductRepository;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductService
 {
+    use UtilService;
     private $productRepository;
     private $categoryProductRepository;
 
@@ -26,8 +28,8 @@ class ProductService
         $limit = Arr::get($searchParams, 'raw', 10);
         $keyword = Arr::get($searchParams, 'keyword', '');
         $category_id = Arr::get($searchParams, 'category_id', '');
-        $column = Arr::get($searchParams, 'column', '');
-        $order = Arr::get($searchParams, 'order', '');
+        $column = Arr::get($searchParams, 'column', 'created_at');
+        $order = Arr::get($searchParams, 'order', 'desc');
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
                 $q->where('code', 'LIKE', '%' . $keyword . '%');
@@ -43,22 +45,36 @@ class ProductService
         if ($order)
             $query->orderBy($column, $order);
 
-        return $query->isNotDelete()->paginate($limit);
+        return $query->paginate($limit);
     }
 
     //service create data
     public function storeProduct($data)
     {
-        $this->productRepository->save($data);
+        $product = $this->productRepository->save($data);
+        if($data->has('product_file')){
+            $pathThumb = $this->uploadFile($data->product_file, $product->code);
+
+            $this->productRepository->updateThumb($pathThumb, $product);
+        }
     }
 
     public function updateProduct($data, $id)
     {
-        $this->productRepository->save($data, $id);
+        $product = $this->productRepository->save($data, $id);
+        if($data->has('product_file') && $data->product_file){
+            $pathThumb = $this->uploadFile($data->product_file, $product->code);
+
+            $this->productRepository->updateThumb($pathThumb, $product);
+        }
     }
 
     public function destroyProduct($id)
     {
+        $countBillByCategory = BillDetail::where('category_product_id', $id)->count();
+        if($countBillByCategory > 0)
+            return 'bill';
+
         $customer = $this->productRepository->get($id);
         $customer->update([
             'deleted_by' => Auth::id(),

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Bill;
 use App\Exports\CustomerExport;
 use App\Repositories\CustomerRepository;
 use Carbon\Carbon;
@@ -22,8 +23,8 @@ class CustomerService{
         $query = $this->customerRepository->query();
         $limit = Arr::get($searchParams, 'raw', 10);
         $keyword = Arr::get($searchParams, 'keyword', '');
-        $column = Arr::get($searchParams, 'column', '');
-        $order = Arr::get($searchParams, 'order', '');
+        $column = Arr::get($searchParams, 'column', 'created_at');
+        $order = Arr::get($searchParams, 'order', 'desc');
         $export = Arr::get($searchParams, 'export', '');
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
@@ -58,10 +59,16 @@ class CustomerService{
 
     public function destroyCustomer($id)
     {
+        $countBillByCustomer = Bill::where('customer_id', $id)->count();
+        if($countBillByCustomer > 0)
+            return 'bill';
+
         $customer = $this->customerRepository->get($id);
         $customer->update([
             'deleted_by' => Auth::id(),
             'deleted_at' => Carbon::now()
         ]);
+
+        return 'success';
     }
 }

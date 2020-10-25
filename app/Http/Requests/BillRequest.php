@@ -24,6 +24,7 @@ class BillRequest extends FormRequest
         $rules =  [
             'code' => 'required|max:255',
             'customer_id' => 'required',
+            'staff_id' => 'required',
             'total_row' => 'required|numeric|min:1',
         ];
 
@@ -58,6 +59,7 @@ class BillRequest extends FormRequest
         $attrDefault =  [
             'code' => 'Mã hóa đơn',
             'customer_id' => 'Khách hàng',
+            'staff_id' => 'Nhân viên',
             'note' => 'Ghi chú',
             'total_row' => 'Sản phẩm',
         ];
