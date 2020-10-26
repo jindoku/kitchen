@@ -91,7 +91,7 @@ class ProductController extends Controller
                     'status' => 'warning',
                     'message' => 'Không thể xóa bản ghi đang tồn tại ở hóa đơn'
                 ], 200);
-            
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Xóa bản ghi thành công'
