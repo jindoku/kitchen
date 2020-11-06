@@ -36,17 +36,20 @@
                             <div class="table-responsive">
                                 <table class="table invoice-table invoice-order table-borderless w-75 m-l-15">
                                     <thead>
-                                        <th class="w-50 text-uppercase" style="border-bottom: none">Thông tin khách hàng</th>
-                                        <th class="text-uppercase" style="border-bottom: none">Thông tin hóa đơn</th>
+                                        <th class="text-uppercase" style="border-bottom: none; width: 40%">Thông tin khách hàng</th>
+                                        <th class="text-uppercase" style="border-bottom: none; width: 30%">Thông tin hóa đơn</th>
+                                        <th class="text-uppercase" style="border-bottom: none; width: 30%">Thông tin nhân viên</th>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Họ và tên: {{$bill->customer->fullname}}</td>
                                             <td>Mã hóa đơn: {{$bill->code}}</td>
+                                            <td>Mã nhân viên: {{$bill->staff->code}}</td>
                                         </tr>
                                         <tr>
                                             <td>Địa chỉ: {{$bill->customer->address}}</td>
                                             <td>Ngày lập: {{date ('d-m-Y', strtotime($bill->created_at))}}</td>
+                                            <td>Tên nhân viên: {{$bill->staff->fullname}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Số điện thoại: {{$bill->customer->phone}}</td>
