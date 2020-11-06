@@ -20,7 +20,7 @@
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             @php
                                 use Illuminate\Support\Facades\Auth;
-                                $username = Auth::user() ? Auth::user()->name : 'Lê Hải'
+                                $username = Auth::user() ? Auth::user()->staff->fullname : 'Lê Hải'
                             @endphp
                             <span>{{$username}}</span>
                             <i class="feather icon-chevron-down"></i>

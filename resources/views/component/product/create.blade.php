@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Tên thiết bị<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="name" maxlength="255" value="{{old('name')}}">
+                            <input type="text" class="form-control" name="name" maxlength="255" value="{{old('name')}}" autocomplete="off">
                             @if ($errors->has('name'))
                                 <p class="text-danger">{{$errors->first('name')}}</p>
                             @endif
@@ -50,14 +50,14 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Giá thành<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="price" maxlength="255" value="{{old('price')}}">
+                            <input type="text" class="form-control" name="price" maxlength="255" value="{{old('price')}}" autocomplete="off">
                             @if ($errors->has('price'))
                                 <p class="text-danger">{{$errors->first('price')}}</p>
                             @endif
                         </div>
                         <div class="form-group col-md-8">
                             <label class="col-form-label">Nhà cung cấp</label>
-                            <input type="text" class="form-control" name="supplier" maxlength="255" value="{{old('supplier')}}">
+                            <input type="text" class="form-control" name="supplier" maxlength="255" value="{{old('supplier')}}" autocomplete="off">
                             @if ($errors->has('supplier'))
                                 <p class="text-danger">{{$errors->first('supplier')}}</p>
                             @endif

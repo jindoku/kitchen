@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Bill;
 use App\Repositories\StaffRepository;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,8 @@ class StaffService
     //service create data
     public function storeStaff($data)
     {
-        $this->staffRepository->save($data);
+        $staff = $this->staffRepository->save($data);
+        $this->storeUser($staff, $data['password']);
     }
 
     public function updateStaff($data, $id)
@@ -56,11 +58,19 @@ class StaffService
             return 'bill';
 
         $staff = $this->staffRepository->get($id);
-        $staff->update([
-           'deleted_by' => Auth::id(),
-           'deleted_at' => Carbon::now()
-        ]);
+        $staff->delete();
+        $staff->user->delete();
 
         return 'success';
+    }
+
+    public function storeUser($staff, $password)
+    {
+        User::create([
+            'name' => $staff->code,
+            'password' => bcrypt($password),
+            'email' => $staff->email,
+            'staff_id' => $staff->id
+        ]);
     }
 }

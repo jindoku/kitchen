@@ -2,7 +2,6 @@
 @section('head.title')
     Chỉnh sửa nhóm hàng
 @endsection
-
 @section('content')
     <div class="page-header m-t-150 page-header-index">
         <div class="row">
@@ -18,13 +17,13 @@
     <div class="page-body">
         <div class="card card-index">
             <div class="card-block">
-                <form class="forms-sample" method="POST" action="{{route('customer.update', $categoryProduct->id)}}">
+                <form class="forms-sample" method="POST" action="{{route('category-product.update', $categoryProduct->id)}}">
                     @csrf
                     @method('PATCH')
                     <div class="row">
                         <div class="form-group col-md-5">
                             <label class="col-form-label">Mã nhóm hàng<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="code" value="{{$categoryProduct->code}}" autocomplete="off" maxlength="255">
+                            <input type="text" class="form-control" name="code" value="{{$categoryProduct->code}}" autocomplete="off" maxlength="255" readonly>
                             @if ($errors->has('code'))
                                 <p class="text-danger">{{$errors->first('code')}}</p>
                             @endif

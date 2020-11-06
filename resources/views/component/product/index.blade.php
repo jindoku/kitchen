@@ -58,7 +58,7 @@
                                 <td>{{$product->code}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->categoryProduct->name}}</td>
-                                <td>{{$product->price}}</td>
+                                <td class="text-center">{{number_format($product->price)}}</td>
                                 <td>{{$product->supplier}}</td>
                                 <td class="text-center">
                                     <a class="p-l-5" href="{{route('product.edit', $product->id)}}" title="Chỉnh sửa">

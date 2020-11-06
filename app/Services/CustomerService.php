@@ -64,10 +64,7 @@ class CustomerService{
             return 'bill';
 
         $customer = $this->customerRepository->get($id);
-        $customer->update([
-            'deleted_by' => Auth::id(),
-            'deleted_at' => Carbon::now()
-        ]);
+        $customer->delete();
 
         return 'success';
     }

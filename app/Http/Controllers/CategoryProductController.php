@@ -63,7 +63,7 @@ class CategoryProductController extends Controller
         try{
             $data = $categoryProductRequest->all();
             $this->categoryProductService->updateCategoryProduct($data, $id);
-            return redirect()->route('customer.index')->with(['status'=>'success','message'=>'Chỉnh sửa thành công']);
+            return redirect()->route('category-product.index')->with(['status'=>'success','message'=>'Chỉnh sửa thành công']);
         }
         catch (\Exception $ex)
         {

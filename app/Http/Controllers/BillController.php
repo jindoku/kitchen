@@ -59,6 +59,7 @@ class BillController extends Controller
 
     public function show(Bill $bill)
     {
+        $bill->update(['exported' => 1]);
         return view('component.bill.view-bill', compact('bill'));
     }
 

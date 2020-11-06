@@ -2,8 +2,6 @@
 @section('head.title')
     Lập hóa đơn
 @endsection
-@section('head.css')
-@endsection
 @section('content')
     <div class="page-header m-t-150 page-header-index">
         <div class="row">
@@ -39,18 +37,6 @@
                             </select>
                             @if ($errors->has('customer_id'))
                                 <p class="text-danger">{{$errors->first('customer_id')}}</p>
-                            @endif
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="col-form-label">Nhân viên lập<span class="text-danger">*</span></label>
-                            <select class="form-control select2-input form-control-sm" name="staff_id">
-                                <option value="">-- Nhân viên --</option>
-                                @foreach($staffs as $staff)
-                                    <option value="{{$staff->id}}" @if(old('staff_id') == $staff->id) selected @endif>{{$staff->fullname}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('staff_id'))
-                                <p class="text-danger">{{$errors->first('staff_id')}}</p>
                             @endif
                         </div>
                         <div class="col-md-3">

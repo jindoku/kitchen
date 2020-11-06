@@ -29,8 +29,8 @@ if (!function_exists('generate_customer')) {
     function generate_customer()
     {
         try {
-            $staff = DB::table('customer')->selectRaw('MAX(SUBSTR(code,3)) as code')->first();
-            $sttCode = !empty($staff) ? (int)$staff->code : 0;
+            $customer = DB::table('customer')->selectRaw('MAX(SUBSTR(code,3)) as code')->first();
+            $sttCode = !empty($customer) ? (int)$customer->code : 0;
             $code = 'KH' . sprintf("%04s", $sttCode + 1);
 
             return $code;
@@ -45,8 +45,8 @@ if (!function_exists('generate_bill')) {
     function generate_bill()
     {
         try {
-            $staff = DB::table('bill')->selectRaw('MAX(SUBSTR(code,3)) as code')->first();
-            $sttCode = !empty($staff) ? (int)$staff->code : 0;
+            $bill = DB::table('bill')->selectRaw('MAX(SUBSTR(code,3)) as code')->first();
+            $sttCode = !empty($bill) ? (int)$bill->code : 0;
             $code = 'HD' . sprintf("%04s", $sttCode + 1);
 
             return $code;
@@ -78,5 +78,21 @@ if (!function_exists('get_file_name')) {
     function get_file_name($pathFile)
     {
         return substr($pathFile, strrpos($pathFile, '/') + 1);
+    }
+}
+
+if (!function_exists('generate_category_product')) {
+    function generate_category_product()
+    {
+        try {
+            $cateProduct = DB::table('category_product')->selectRaw('MAX(SUBSTR(code,4)) as code')->first();
+            $sttCode = !empty($cateProduct) ? (int)$cateProduct->code : 0;
+            $code = 'CSP' . sprintf("%04s", $sttCode + 1);
+
+            return $code;
+        } catch (Exception $ex) {
+            Log::error('Có lỗi sinh mã danh mục sản phẩm');
+            abort(500, 'Có lỗi sinh mã danh mục sản phẩm');
+        }
     }
 }

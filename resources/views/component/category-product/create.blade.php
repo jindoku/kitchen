@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="form-group col-md-5">
                             <label class="col-form-label">Mã nhóm hàng<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="code" value="{{ old('code') }}" autocomplete="off" maxlength="255">
+                            <input type="text" class="form-control" name="code" value="{{ generate_category_product() }}" autocomplete="off" maxlength="255" readonly>
                             @if ($errors->has('code'))
                                 <p class="text-danger">{{$errors->first('code')}}</p>
                             @endif

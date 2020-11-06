@@ -49,17 +49,18 @@
                                 <td class="text-center">{{$key + 1 + $index}}</td>
                                 <td>{{$bill->code}}</td>
                                 <td>{{$bill->customer->fullname}}</td>
-                                <td>{{$bill->staff->fullname}}</td>
+                                <td>{{$bill->user->staff->fullname}}</td>
                                 <td class="text-center">{{$bill->updated_at ?  date('d-m-Y', strtotime($bill->updated_at)) : ''}}</td>
                                 <td>{{$bill->note}}</td>
                                 <td class="text-center">
                                     <a class="p-l-5" href="{{route('bill.show', $bill->id)}}" title="Xem hóa đơn">
                                         <i class="fa fa-eye fa-lg"></i>
                                     </a>
-
-                                    <a class="p-l-5" href="{{route('bill.edit', $bill->id)}}" title="Chỉnh sửa">
-                                        <i class="fa fa-edit fa-lg"></i>
-                                    </a>
+                                    @if(empty($bill->exported))
+                                        <a class="p-l-5" href="{{route('bill.edit', $bill->id)}}" title="Chỉnh sửa">
+                                            <i class="fa fa-edit fa-lg"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

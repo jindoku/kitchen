@@ -27,6 +27,7 @@ class StaffRequest extends FormRequest
             'code' => 'required|max:50',
             'fullname' => 'required|max:255',
             'phone' => 'required|max:20',
+            'password' => 'required'
         ];
     }
 
@@ -48,6 +49,7 @@ class StaffRequest extends FormRequest
             'birtday' => 'Ngày sinh',
             'sex' => 'Giới tính',
             'address' => 'Địa chỉ',
+            'password' => 'Mật khẩu'
         ];
     }
 }

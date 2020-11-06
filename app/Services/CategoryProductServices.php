@@ -60,10 +60,7 @@ class CategoryProductServices
             return 'product';
 
         $categoryProduct = $this->categoryProductRepository->get($id);
-        $categoryProduct->update([
-            'deleted_by' => Auth::id(),
-            'deleted_at' => Carbon::now()
-        ]);
+        $categoryProduct->delete();
 
         return 'success';
     }

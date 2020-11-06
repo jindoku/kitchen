@@ -75,11 +75,8 @@ class ProductService
         if($countBillByCategory > 0)
             return 'bill';
 
-        $customer = $this->productRepository->get($id);
-        $customer->update([
-            'deleted_by' => Auth::id(),
-            'deleted_at' => Carbon::now()
-        ]);
+        $product = $this->productRepository->get($id);
+        $product->delete();
     }
 
     public function getCategoryProduct()

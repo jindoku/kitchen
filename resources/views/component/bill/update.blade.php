@@ -44,18 +44,6 @@
                                 <p class="text-danger">{{$errors->first('customer_id')}}</p>
                             @endif
                         </div>
-                        <div class="form-group col-md-3">
-                            <label class="col-form-label">Nhân viên lập<span class="text-danger">*</span></label>
-                            <select class="form-control select2-input form-control-sm" name="staff_id">
-                                <option value="">-- Nhân viên --</option>
-                                @foreach($staffs as $staff)
-                                    <option value="{{$staff->id}}" @if($staff->id == $staffId) selected @endif>{{$staff->fullname}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('staff_id'))
-                                <p class="text-danger">{{$errors->first('staff_id')}}</p>
-                            @endif
-                        </div>
                         <div class="col-md-3">
                             <div class="m-t-30">
                                 <a class="btn btn-inverse btn-sm color-white" title="Thêm mới" href="{{route('customer.create')}}" target="_blank">

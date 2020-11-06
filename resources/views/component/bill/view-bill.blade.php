@@ -38,18 +38,15 @@
                                     <thead>
                                         <th class="text-uppercase" style="border-bottom: none; width: 40%">Thông tin khách hàng</th>
                                         <th class="text-uppercase" style="border-bottom: none; width: 30%">Thông tin hóa đơn</th>
-                                        <th class="text-uppercase" style="border-bottom: none; width: 30%">Thông tin nhân viên</th>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Họ và tên: {{$bill->customer->fullname}}</td>
                                             <td>Mã hóa đơn: {{$bill->code}}</td>
-                                            <td>Mã nhân viên: {{$bill->staff->code}}</td>
                                         </tr>
                                         <tr>
                                             <td>Địa chỉ: {{$bill->customer->address}}</td>
                                             <td>Ngày lập: {{date ('d-m-Y', strtotime($bill->created_at))}}</td>
-                                            <td>Tên nhân viên: {{$bill->staff->fullname}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Số điện thoại: {{$bill->customer->phone}}</td>
@@ -113,6 +110,27 @@
                             <div class="col-sm-12">
                                 <h6>Ghi chú :</h6>
                                 <p>{{$bill->note}}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12 table-responsive">
+                                <table class="table invoice-detail-table">
+                                    <thead>
+                                        <th class="w-50 text-center" style="border: none">Nhân viên lập</th>
+                                        <th class="w-50" style="border: none">Khách hàng</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: none" class="p-t-35"></td>
+                                            <td style="border: none"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="border: none">{{$bill->staff->fullname}}</td>
+                                            <td style="border: none"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -45,6 +45,16 @@
                             @endif
                         </div>
                         <div class="form-group col-md-3">
+                            <label class="col-form-label">Mật khẩu đăng nhập<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="password" value="{{ old('password') }}"
+                                   autocomplete="off" maxlength="50">
+                            @if ($errors->has('password'))
+                                <p class="text-danger">{{$errors->first('password')}}</p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
                             <label class="col-form-label">Email</label>
                             <input type="text" class="form-control" name="email" value="{{ old('email') }}"
                                    autocomplete="off" maxlength="50">
@@ -52,8 +62,6 @@
                                 <p class="text-danger">{{$errors->first('email')}}</p>
                             @endif
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-3">
                             <label class="col-form-label">Ngày sinh</label>
                             <div class="input-group date datepicker-single">
